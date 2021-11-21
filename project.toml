@@ -1,0 +1,54 @@
+#[tool.black]
+#line-length = 119
+
+[tool.black]
+line-length = 88
+target-version = ['py36', 'py37', 'py38']
+include = '\.pyi?$'
+extend-exclude = '''
+exclude = '(\.eggs|\.git|\.hg|\.mypy_cache|\.nox|\.tox|\.venv|_build|buck-out|build|dist|.*\/models\.py.*|.*\/models\/.*)'
+
+/(
+  # The following are specific to Black, you probably don't want those.
+  | blib2to3
+  | tests/data
+  | profiling
+)/
+'''
+
+
+# Build system information below.
+# NOTE: You don't need this in your own Black configuration.
+
+[build-system]
+requires = ["setuptools>=45.0", "setuptools_scm[toml]>=6.3.1", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[tool.pytest.ini_options]
+# Option below requires `tests/optional.py`
+optional-tests = [
+  "no_python2: run when `python2` extra NOT installed",
+  "no_blackd: run when `d` extra NOT installed",
+  "no_jupyter: run when `jupyter` extra NOT installed",
+]
+markers = [
+  "incompatible_with_mypyc: run when testing mypyc compiled black"
+exclude = '''
+/(
+    \.eggs
+  | \.git
+  | \.mypy_cache
+  | \.tox
+  | \.venv
+  | _build
+  | build
+  | dist
+  | .+/migrations
+)/
+'''
+
+[tool.isort]
+line_length = 119
+skip_gitignore = true
+skip_glob = "*/migrations/*.py"
+profile = "black" 
