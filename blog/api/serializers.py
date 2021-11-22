@@ -65,6 +65,3 @@ class CommentCreateUpdateSerializer(serializers.ModelSerializer):
     class Meta:
         model = Comment
         fields = ["parent", "content"]
-
-    # def create(self, validated_data):
-    #     pass
